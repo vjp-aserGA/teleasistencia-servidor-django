@@ -58,6 +58,7 @@ class IsTeacherMember(permissions.BasePermission):
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+    permission_classes = [IsAdminMember | IsTeacherMember | IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         # Obtenemos el usuario filtrando por el usuario de la request
